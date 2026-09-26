@@ -74,6 +74,11 @@ The red channel of the RGB LED used during Version 1 testing is currently nonfun
   <img src="IMG_5654.jpeg" width="350">
 </p>
 
+## Demo
+
+Version 1 demonstrates continuous area scanning, real-time distance measurement, and automatic visual and audible warning responses when an object enters the warning or danger zones.
+
+[▶ Watch the Version 1 Demo](https://youtube.com/shorts/jyxK6KUi9S4?si=MJRMJU0ft94h1kxm)
 
 ## Next Steps - Version 2
 
