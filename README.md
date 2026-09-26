@@ -63,6 +63,18 @@ Using `millis()` allows multiple parts of the system to operate without relying 
 
 The red channel of the RGB LED used during Version 1 testing is currently nonfunctional due to a hardware issue with the LED itself. The warning-state logic is implemented in software, but the LED will be replaced.
 
+## Project Build
+
+<img src="IMG_5657.jpeg" width="500">
+
+### Hardware Setup
+
+<p>
+  <img src="IMG_5655.jpeg" width="350">
+  <img src="IMG_5654.jpeg" width="350">
+</p>
+
+
 ## Next Steps - Version 2
 
 The next version will expand the scanner from simple proximity detection to object tracking:
