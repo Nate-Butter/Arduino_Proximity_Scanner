@@ -80,18 +80,24 @@ Version 1 demonstrates continuous area scanning, real-time distance measurement,
 
 [▶ Watch the Version 1 Demo](https://youtube.com/shorts/jyxK6KUi9S4?si=MJRMJU0ft94h1kxm)
 
-## Next Steps - Version 2
+## Experimental Object Tracking (Version 2 Prototype)
 
-The next version will expand the scanner from simple proximity detection to object tracking:
+After completing Version 1, I experimented with adding object tracking using the **same Arduino Uno, HC-SR04 ultrasonic sensor, and servo setup**.
 
-- Detect an object while scanning
-- Stop the normal sweep when an object enters the warning area
-- Follow the object's movement with the servo
-- Detect when the object has been lost
-- Automatically return to scanning mode
+I implemented a state-machine approach with three operating modes:
+
+- **SCANNING:** Sweep the sensor to detect nearby objects.
+- **TRACKING:** Attempt to follow a detected object by adjusting the servo position.
+- **SEARCHING:** Attempt to reacquire an object after losing it.
+
+The prototype achieved basic tracking, but its responsiveness was below my goal. In testing, the sensor sometimes struggled to follow an object moving across its field of view. I suspected the single ultrasonic sensor and its need to rotate between measurements contributed to the delays, but I did not conclusively isolate the cause from servo response or algorithm behavior.
+
+This experiment showed me how hardware sensing limitations can affect the performance of a software control algorithm. If I revisit the project, I would test alternative sensing arrangements and compare tracking response times.
+
+**Documentation note:** This was an experimental extension, not part of the published Version 1 code or demo. I did not preserve a separate tracking implementation or demonstration, and the prototype has since been disassembled.
 
 ## Project Status
 
-**Version 1: Working**
+**Version 1:** Working and documented in this repository.
 
-Version 2 object tracking is currently planned.
+**Version 2:** Basic object tracking was prototyped and tested, but did not meet the intended responsiveness. The prototype is no longer assembled.
