@@ -82,22 +82,27 @@ Version 1 demonstrates continuous area scanning, real-time distance measurement,
 
 ## Experimental Object Tracking (Version 2 Prototype)
 
-After completing Version 1, I experimented with adding object tracking using the **same Arduino Uno, HC-SR04 ultrasonic sensor, and servo setup**.
+After completing Version 1, I experimented with object tracking using the **same Arduino Uno, HC-SR04 ultrasonic sensor, and servo motor**. The recovered prototype sketch is available here: [Arduino_Proximity_Scanner_V2_Experimental.ino](Arduino_Proximity_Scanner_V2_Experimental.ino).
 
-I implemented a state-machine approach with three operating modes:
+### Implementation
 
-- **SCANNING:** Sweep the sensor to detect nearby objects.
-- **TRACKING:** Attempt to follow a detected object by adjusting the servo position.
-- **SEARCHING:** Attempt to reacquire an object after losing it.
+The prototype uses two operating modes:
 
-The prototype achieved basic tracking, but its responsiveness was below my goal. In testing, the sensor sometimes struggled to follow an object moving across its field of view. I suspected the single ultrasonic sensor and its need to rotate between measurements contributed to the delays, but I did not conclusively isolate the cause from servo response or algorithm behavior.
+- **SCANNING:** Sweep the ultrasonic sensor to detect objects within the 48-inch warning range.
+- **TRACKING:** Sample distance at the current servo angle and at offsets of 8° to either side, then move the tracking center toward the closest valid reading. After three cycles with no valid detection, return to scanning.
 
-This experiment showed me how hardware sensing limitations can affect the performance of a software control algorithm. If I revisit the project, I would test alternative sensing arrangements and compare tracking response times.
+The tracking routine is implemented as four sequential steps: command the center angle, measure center, measure left, and measure right before selecting the next direction. The sketch uses a **150 ms settling interval** before each of the three measurements, giving a minimum of approximately **450 ms per tracking decision**, plus sensor-read and processing time. A single ultrasonic measurement can also wait up to 25 ms for an echo.
 
-**Documentation note:** This was an experimental extension, not part of the published Version 1 code or demo. I did not preserve a separate tracking implementation or demonstration, and the prototype has since been disassembled.
+### Results and Limitations
+
+The experimental prototype achieved basic tracking, but it did not follow moving objects as quickly or reliably as I wanted. I suspected that relying on a single rotating ultrasonic sensor limited how frequently the system could observe the object's position. Reviewing the recovered code also identified the sequential measurement waits as a likely source of additional delay.
+
+I did not isolate or measure the relative contributions of sensor coverage, servo response, and algorithm timing. A future revision could compare shorter settling intervals, different sensing arrangements, and measured tracking response times.
+
+**Documentation note:** This code was recovered from the original development work after the hardware had been disassembled. It is provided as an **experimental, previously tested prototype**, not as a verified finished tracking system. The repository's Version 1 demo shows the original scanner, not this tracking extension.
 
 ## Project Status
 
 **Version 1:** Working and documented in this repository.
 
-**Version 2:** Basic object tracking was prototyped and tested, but did not meet the intended responsiveness. The prototype is no longer assembled.
+**Version 2:** Experimental object-tracking prototype recovered and archived. Basic tracking was observed during development, but responsiveness did not meet the design goal. The hardware is no longer assembled, and the recovered sketch has not been retested.
